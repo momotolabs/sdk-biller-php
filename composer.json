@@ -1,0 +1,20 @@
+{
+  "name": "momotolabs/sdk-biller",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Momotolabs\\SdkBiller\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Irvin Cortez",
+      "email": "irvincotez67@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^8.2",
+    "guzzlehttp/guzzle": "^7.0"
+  }
+}
