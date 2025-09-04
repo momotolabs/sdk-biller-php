@@ -1,5 +1,6 @@
 <?php
-namespace Src\Core;
+
+namespace Momotolabs\SdkBiller\Core;
 
 use GuzzleHttp\Client as Guzzle;
 

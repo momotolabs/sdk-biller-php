@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Core;
+namespace Momotolabs\SdkBiller\Core;
 
 class Config
 {
