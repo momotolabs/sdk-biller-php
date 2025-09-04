@@ -1,17 +1,17 @@
 <?php
 
-namespace Src\Resource\DTO\FE;
+namespace Momotolabs\SdkBiller\Resource\DTO\FE;
 
 use InvalidArgumentException;
 use Momotolabs\SdkBiller\Resource\DTO\FE\BodyItem;
-use Momotolabs\SdkBiller\Resource\DTO\FE\PaymentItem;
+use Momotolabs\SdkBiller\Resource\DTO\Shared\PaymentItem;
 
 class FEBuilder {
     
     /**
      * FEBuilder constructor.
      *
-     * @param BodyItem[] $bodyItem Instancias de BodyItem
+     * @param BodyItem[] $body Instancias de BodyItem
      * @param PaymentItem[] $payments Instancias de PaymentItem
      * @param int $operationCodition Código de operación
      * @throws InvalidArgumentException Si algún elemento no es del tipo correcto

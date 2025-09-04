@@ -3,7 +3,7 @@
 namespace Momotolabs\SdkBiller\Resource;
 
 use Momotolabs\SdkBiller\Core\ClientGuzzleHttp;
-use Src\Resource\DTO\FE\FEBuilder;
+use Momotolabs\SdkBiller\Resource\DTO\FE\FEBuilder;
 
 class BillerService {
     public function __construct(
@@ -11,10 +11,10 @@ class BillerService {
     ) {}
 
     public function fe(FEBuilder|array $factura): array {
-        $payload = $factura instanceof ApiResource
+        $payload = $factura instanceof FEBuilder
             ? $factura->toArray()
             : $factura;
 
-        return $this->client->post('/ebill/FE', $payload);
+        return $this->client->post('ebill/FE', $payload);
     }
 }

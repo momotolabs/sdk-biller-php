@@ -1,6 +1,6 @@
 <?php
 
-namespace Momotolabs\SdkBiller\Resource\DTO\FE;
+namespace Momotolabs\SdkBiller\Resource\DTO\Shared;
 
 class PaymentItem {
     public function __construct(
