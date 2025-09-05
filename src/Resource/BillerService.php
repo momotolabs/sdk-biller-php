@@ -10,7 +10,7 @@ class BillerService {
         protected ClientGuzzleHttp $client
     ) {}
 
-    public function fe(FEBuilder|array $factura): array {
+    public function sendFe(FEBuilder|array $factura): array {
         $payload = $factura instanceof FEBuilder
             ? $factura->toArray()
             : $factura;

@@ -1,5 +1,14 @@
 <?php
 
+use Dotenv\Dotenv;
+
+if (file_exists(__DIR__ . '/../.env.testing')) {
+    Dotenv::createImmutable(dirname(__DIR__), '.env.testing')->load();
+}
+
+pest()->in('Unit');
+pest()->in('Feature');
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
