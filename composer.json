@@ -1,5 +1,6 @@
 {
   "name": "momotolabs/sdk-biller",
+  "description": "Wrapper para la integración con la API de Biller de Momotolabs",
   "type": "library",
   "license": "MIT",
   "autoload": {
