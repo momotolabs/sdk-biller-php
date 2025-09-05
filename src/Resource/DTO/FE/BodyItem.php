@@ -16,7 +16,7 @@ class BodyItem {
         public ?string $documentNumber = null,
         public ?string $code = null,
         public ?string $taxCode = null,
-        public array $taxes = []
+        public ?array $taxes = []
     ) {}
 
 

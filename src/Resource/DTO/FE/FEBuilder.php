@@ -17,6 +17,7 @@ class FEBuilder {
      * @throws InvalidArgumentException Si algún elemento no es del tipo correcto
      */
     public function __construct(
+        public ?Client $client,
         public array $body,
         public array $payments,
         public int $operationCodition
@@ -33,7 +34,7 @@ class FEBuilder {
 
     public function toArray(): array {
         return [
-            "receiver" => null,
+            "receiver" => $this->client == null ? (new Client())->toArray(): $this->client->toArray(),
             "bodyBill" => array_map(fn (BodyItem $item) => $item->toArray(), $this->body),
             "operationCondition" => $this->operationCodition,
             "thirdSale" => null,
