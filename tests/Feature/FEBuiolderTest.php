@@ -15,7 +15,7 @@ test('feature send FE OK', function () {
 
     $config = new Config([
         'base_url' => $_ENV['BILLER_BASE_URL'],
-        'headers'  => [
+        'headers' => [
             'Authorization' => 'Bearer ' . $_ENV['BILLER_TOKEN'],
             "X-Business-Id" => $_ENV['BILLER_BUSSINESS_ID'],
             "X-Pos-Id" => $_ENV['BILLER_POS_ID'],
@@ -26,7 +26,7 @@ test('feature send FE OK', function () {
     $client = new ClientGuzzleHttp($config);
     $service = new BillerService($client);
 
-    $body =  [
+    $body = [
         new BodyItem(
             itemType: 1,
             quantity: 1,
@@ -42,7 +42,7 @@ test('feature send FE OK', function () {
         new PaymentItem(
             code: "02",
             term: "01",
-            reference: "4081151108", 
+            reference: "4081151108",
         )
     ];
 
