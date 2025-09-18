@@ -26,27 +26,26 @@ test('feature send FE OK', function () {
     $client = new ClientGuzzleHttp($config);
     $service = new BillerService($client);
 
-    $body = [
-        new BodyItem(
-            itemType: 1,
-            quantity: 1,
-            unitMeasure: 99,
-            code: "1234",
-            description: 'Producto 1',
-            unitPrice: 100.00,
-            taxes: null
-        ),
-    ];
+    $fe = (new FEBuilder())
+        ->addBodyItem(
+            new BodyItem(
+                itemType: 1,
+                quantity: 1,
+                unitMeasure: 99,
+                code: "1234",
+                description: 'Producto 1',
+                unitPrice: 100.00,
+                taxes: null
+            ),
+        )->addPaymentItem(
+            new PaymentItem(
+                code: "02",
+                term: "01",
+                reference: "4081151108",
+            )
+        )->withOperationCondition(1);
 
-    $payment = [
-        new PaymentItem(
-            code: "02",
-            term: "01",
-            reference: "4081151108",
-        )
-    ];
-
-    $response = $service->sendFe(new FEBuilder(client: null, body: $body, payments: $payment, operationCodition: 1));
+    $response = $service->send($fe->build());
 
     expect($response)
         ->toHaveKey('data.selloRecepcion')
