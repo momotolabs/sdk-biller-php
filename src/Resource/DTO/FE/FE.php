@@ -34,8 +34,8 @@ class FE implements DTE
             "bodyBill" => array_map(fn(BodyItem $item) => $item->toArray(), $this->body),
             "operationCondition" => $this->operationCondition,
             "thirdSale" => $this->thirdSale == null ? null : array_map(fn(ThirdSale $item) => $item->toArray(), $this->thirdSale),
-            "documentsRelated" => array_map(fn(RelatedDocument $document) => $document->toArray(), $this->relatedDocuments),
-            "payments" => $this->relatedDocuments == null ? null : array_map(fn(PaymentItem $item) => $item->toArray(), $this->payments),
+            "documentsRelated" => $this->relatedDocuments == null ? null : array_map(fn(RelatedDocument $document) => $document->toArray(), $this->relatedDocuments),
+            "payments" => $this->payments == null ? null : array_map(fn(PaymentItem $item) => $item->toArray(), $this->payments),
         ];
     }
 }

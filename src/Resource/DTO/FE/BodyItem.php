@@ -17,7 +17,7 @@ class BodyItem
         public ?string $documentNumber = null,
         public ?string $code = null,
         public ?string $taxCode = null,
-        public ?array $taxes = [] // TODO: por defecto debe ser un array vacion v0.1.1
+        public ?array $taxes = null
     ) {
     }
 

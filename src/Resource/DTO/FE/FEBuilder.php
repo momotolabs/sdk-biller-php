@@ -31,18 +31,12 @@ class FEBuilder
 
     public function addBodyItem(BodyItem $item): self
     {
-        if (!$item instanceof BodyItem) {
-            throw new InvalidArgumentException('Todos los elementos de body deben ser instancias de BodyItem.');
-        }
         $this->body[] = $item;
         return $this;
     }
 
     public function addPaymentItem(PaymentItem $item): self
     {
-        if (!$item instanceof PaymentItem) {
-            throw new InvalidArgumentException('Todos los elementos de payments deben ser instancias de PaymentItem.');
-        }
         $this->payments[] = $item;
         return $this;
     }
@@ -55,13 +49,13 @@ class FEBuilder
 
     public function addRelatedDocument(RelatedDocument $document): self
     {
-        array_push($this->relatedDocuments, $document);
+        $this->relatedDocuments[] = $document;
         return $this;
     }
 
     public function addThirdSale(ThirdSale $item): self
     {
-        array_push($this->thirdSale, $item);
+        $this->thirdSale[] = $item;
         return $this;
     }
 
