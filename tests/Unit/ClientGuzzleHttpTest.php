@@ -18,6 +18,8 @@ it('realiza un GET y devuelve el JSON', function () {
     $config = new Config([
         'base_url' => 'https://fake.api',
         'headers' => ['X-Test' => 'yes'],
+        'client_id' => 'foo',
+        'client_secret' => 'bar',
     ]);
 
     // Inyectar handler mockeado
@@ -49,6 +51,8 @@ it('realiza un POST y devuelve el JSON', function () {
 
     $config = new Config([
         'base_url' => 'https://fake.api',
+        'client_id' => 'foo',
+        'client_secret' => 'bar',
     ]);
 
     $client = new ClientGuzzleHttp($config);

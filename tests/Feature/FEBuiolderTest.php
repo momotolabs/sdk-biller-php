@@ -9,19 +9,22 @@ use Momotolabs\SdkBiller\Resource\DTO\FE\FEBuilder;
 
 test('feature send FE OK', function () {
 
-    if (!$_ENV['BILLER_TOKEN'] || !$_ENV['BILLER_BASE_URL']) {
+    if (!$_ENV['BILLER_CLIENT_ID'] || !$_ENV['BILLER_BASE_URL']) {
         $this->markTestSkipped('Se requieren BILLER_BASE_URL y BILLER_TOKEN para integración');
     }
 
-    $config = new Config([
+    $settings = [
         'base_url' => $_ENV['BILLER_BASE_URL'],
         'headers' => [
-            'Authorization' => 'Bearer ' . $_ENV['BILLER_TOKEN'],
             "X-Business-Id" => $_ENV['BILLER_BUSSINESS_ID'],
             "X-Pos-Id" => $_ENV['BILLER_POS_ID'],
             "X-Member-Code" => $_ENV['BILLER_MEMBER_CODE'],
         ],
-    ]);
+        'client_id' => $_ENV['BILLER_CLIENT_ID'],
+        'client_secret' => $_ENV['BILLER_CLIENT_SECRET'],
+    ];
+
+    $config = new Config($settings);
 
     $client = new ClientGuzzleHttp($config);
     $service = new BillerService($client);

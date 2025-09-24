@@ -9,7 +9,7 @@ use Momotolabs\SdkBiller\Resource\Interfaces\DTE;
 class BillerService
 {
     public function __construct(
-        protected ClientGuzzleHttp $client
+        protected ClientGuzzleHttp $clientGuzzle
     ) {
     }
 
@@ -22,6 +22,16 @@ class BillerService
             default => 'ebill/unknown'
         };
 
-        return $this->client->post($endpoint, $payload);
+        return $this->clientGuzzle->post($endpoint, $payload);
+    }
+
+    public function loginInBiller($clientId, $clientSecret): void
+    {
+        $response = $this->clientGuzzle->post('oauth/token', [
+            'grant_type' => 'client_credentials',
+            'client_id' => $clientId,
+            'client_secret' => $clientSecret,
+            'scope' => '*',
+        ]);
     }
 }
