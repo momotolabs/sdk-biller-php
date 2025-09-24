@@ -4,6 +4,7 @@ namespace Momotolabs\SdkBiller\Core;
 
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\ClientException;
+use Momotolabs\SdkBiller\Resource\Interfaces\TokenStorageInterface;
 
 class ClientGuzzleHttp
 {
@@ -14,6 +15,7 @@ class ClientGuzzleHttp
     protected Guzzle $client;
     protected string $clientId;
     protected string $clientSecret;
+    protected TokenStorageInterface $storage;
 
     /**
      * Setup the client
@@ -21,7 +23,7 @@ class ClientGuzzleHttp
      * Summary of __construct
      * @param Config $config
      */
-    public function __construct(Config $config)
+    public function __construct(Config $config, ?TokenStorageInterface $tokenStorage = null)
     {
         $this->client = new Guzzle([
             "base_uri" => $config->get("base_url"),
@@ -33,6 +35,12 @@ class ClientGuzzleHttp
 
         $this->clientId = $config->get("client_id");
         $this->clientSecret = $config->get("client_secret");
+
+        $this->storage = $storage ?? new InMemoryTokenStorage();
+
+        if ($token = $this->storage->getToken()) {
+            $this->updateClientAuthorizationHeader($token);
+        }
     }
 
     public function get(string $url, array $query = [])
