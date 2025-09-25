@@ -9,44 +9,45 @@ use Momotolabs\SdkBiller\Resource\DTO\FE\FEBuilder;
 
 test('feature send FE OK', function () {
 
-    if (!$_ENV['BILLER_TOKEN'] || !$_ENV['BILLER_BASE_URL']) {
+    if (!$_ENV['BILLER_CLIENT_ID'] || !$_ENV['BILLER_BASE_URL']) {
         $this->markTestSkipped('Se requieren BILLER_BASE_URL y BILLER_TOKEN para integración');
     }
 
-    $config = new Config([
+    $settings = [
         'base_url' => $_ENV['BILLER_BASE_URL'],
-        'headers'  => [
-            'Authorization' => 'Bearer ' . $_ENV['BILLER_TOKEN'],
+        'headers' => [
             "X-Business-Id" => $_ENV['BILLER_BUSSINESS_ID'],
             "X-Pos-Id" => $_ENV['BILLER_POS_ID'],
             "X-Member-Code" => $_ENV['BILLER_MEMBER_CODE'],
         ],
-    ]);
+        'client_id' => $_ENV['BILLER_CLIENT_ID'],
+        'client_secret' => $_ENV['BILLER_CLIENT_SECRET'],
+    ];
+
+    $config = new Config($settings);
 
     $client = new ClientGuzzleHttp($config);
     $service = new BillerService($client);
 
-    $body =  [
-        new BodyItem(
-            itemType: 1,
-            quantity: 1,
-            unitMeasure: 99,
-            code: "1234",
-            description: 'Producto 1',
-            unitPrice: 100.00,
-            taxes: null
-        ),
-    ];
+    $fe = (new FEBuilder())
+        ->addBodyItem(
+            new BodyItem(
+                itemType: 1,
+                quantity: 1,
+                unitMeasure: 99,
+                code: "1234",
+                description: 'Producto 1',
+                unitPrice: 100.00
+            ),
+        )->addPaymentItem(
+            new PaymentItem(
+                code: "02",
+                term: "01",
+                reference: "4081151108",
+            )
+        )->withOperationCondition(1);
 
-    $payment = [
-        new PaymentItem(
-            code: "02",
-            term: "01",
-            reference: "4081151108", 
-        )
-    ];
-
-    $response = $service->sendFe(new FEBuilder(client: null, body: $body, payments: $payment, operationCodition: 1));
+    $response = $service->send($fe->build());
 
     expect($response)
         ->toHaveKey('data.selloRecepcion')

@@ -2,7 +2,8 @@
 
 namespace Momotolabs\SdkBiller\Resource\DTO\FE;
 
-class BodyItem {
+class BodyItem
+{
     public function __construct(
         public int $itemType,
         public float $quantity,
@@ -16,11 +17,13 @@ class BodyItem {
         public ?string $documentNumber = null,
         public ?string $code = null,
         public ?string $taxCode = null,
-        public ?array $taxes = []
-    ) {}
+        public ?array $taxes = null
+    ) {
+    }
 
 
-    public function toArray(): array {
+    public function toArray(): array
+    {
         return [
             "itemType" => $this->itemType,
             "quantity" => $this->quantity,

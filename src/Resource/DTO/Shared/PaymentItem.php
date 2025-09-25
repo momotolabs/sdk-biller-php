@@ -2,17 +2,19 @@
 
 namespace Momotolabs\SdkBiller\Resource\DTO\Shared;
 
-class PaymentItem {
+class PaymentItem
+{
     public function __construct(
         public string $code,
         public ?string $term = null,
         public ?string $reference = null,
         public ?int $period = null
-        ) {
-        
+    ) {
+
     }
 
-    public function toArray(): array {
+    public function toArray(): array
+    {
         return [
             "code" => $this->code,
             "term" => $this->term,
