@@ -37,8 +37,7 @@ test('feature send FE OK', function () {
                 unitMeasure: 99,
                 code: "1234",
                 description: 'Producto 1',
-                unitPrice: 100.00,
-                taxes: null
+                unitPrice: 100.00
             ),
         )->addPaymentItem(
             new PaymentItem(
